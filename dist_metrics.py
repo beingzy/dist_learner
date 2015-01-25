@@ -32,6 +32,8 @@ def grouped_average_distance(data, id_pairs, weigthts = None):
 	========
 	res: {dict} {"sim_dist": [...], "diff_dist": [...] }
 	"""
+	data = np.array(data)
+
 	all_pairs = [i for i in it.combinations(range(len(data)), 2)]
 	sim_dist, diff_dist = [], []
 	for p in all_pairs:
@@ -51,7 +53,10 @@ def grouped_average_distance(data, id_pairs, weigthts = None):
 		   "diff_size": n_size_diff}
 	return res
 
-def objective_func(data, id_paris, dist_weights, comp_weights = [0.75, 0.25]):
+def objective_func(data, \
+				   id_paris, \
+				   dist_weights, \
+				   comp_weights = [0.75, 0.25]):
 	"""
 	Objective function to measure the context to how a new weigths vector 
 	perform better than a chosen reference weights. The measure favors the 
@@ -70,6 +75,7 @@ def objective_func(data, id_paris, dist_weights, comp_weights = [0.75, 0.25]):
 	========
 	res: {numeric} weighted metric measures the voerall improvments
 	"""
+
 	data = np.array(data)
 	ref_weights = [1] * data.shape[1] 
 	# reference 
@@ -86,6 +92,12 @@ def objective_func(data, id_paris, dist_weights, comp_weights = [0.75, 0.25]):
 	# sum of weighted increments
 	res = imp_sim * comp_weights[0] + imp_diff * comp_weights[1]
 	return res
+
+def optimize_fit():
+	"""
+	"""
+	pass
+
 
 
 
